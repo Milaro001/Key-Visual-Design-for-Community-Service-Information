@@ -1,0 +1,76 @@
+# content/D15_canteen/theme.yaml
+# D15 商业与便民生活 —— 社区食堂供餐信息
+# 五轴分类（见 taxonomy.yaml）+ 槽位 + L2 来源 + 待人类确认 + 骨架专属校验
+# 由 0_生成工具/生成内容包.py 生成，勿手改（改数据源后重跑）
+
+theme_id: D15_canteen
+title_zh: "社区食堂供餐信息"
+title_en: "Community Canteen: Menu and Hours"
+
+# ---------- 语言版本（v1.4 规则）----------
+language: zh-only          # bilingual（受众含 A06 国际居民）| zh-only（仅中文）
+language_rule: "受众含 A06 → 出中英双语；否则只出中文海报与相关内容"
+
+# ---------- 风格来源（v1.6：先按五大类，15 类暂不细分）----------
+family: F3                    # 居住与环境
+style_ref: references/05-style-spec.md#F3
+style_status: 待填（人类补全五大类风格要求表后自动生效；本类继承 F3，不单独改）
+
+# ---------- 五轴 ----------
+domain: D15
+function: S1
+audience: [A01, A02]
+audience_status: "AI 按主题拟定，待用户确认"   # 用户给出受众时以用户为准
+timeliness: T1
+authority: L5
+skeleton: S1
+
+# ---------- 画布：默认固定 A3（用户指定尺寸时才改，见 04_SKILL.md 尺寸决策规则）----------
+canvas:
+  size_mm: [297, 420]            # 默认 A3 竖版（裁切线内）；用户指定其他尺寸时以其为准
+  ratio: "1:1.414"
+  bleed_mm: 3
+  total_mm: [303, 426]
+  px_300dpi: [3508, 4961]        # 成品
+  px_300dpi_bleed: [3579, 5032]  # 含出血
+  format: [PNG, PDF]             # PNG 供屏幕/微信，PDF 供打印店
+  color: sRGB
+  transparent: false
+  safe_margin_mm: 18
+  body_font_min_pt: 26           # 含老年人/残障受众 → 31
+  crop_marks: true
+  design_units: [1080, 1527]     # 等比基准；每行容量 中文 25 字 / 英文 49 字符
+
+# ---------- 母本 ----------
+items: 10
+org: {zh: "社区便民服务点", en: "Community Convenience Service Point"}
+placeholders:                    # 全部为示例值，发布前必须替换
+  ORG_ZH: "社区便民服务点"
+  ORG_EN: "Community Convenience Service Point"
+  TITLE_ZH: "社区食堂供餐信息"
+  TITLE_EN: "Community Canteen: Menu and Hours"
+  SITES_ZH: "社区服务中心一层"
+  SITES_EN: "Ground floor, Community Service Center"
+  HOURS_ZH: "每日 11:00-13:00、17:00-19:00"
+  HOURS_EN: "daily 11:00-13:00 and 17:00-19:00"
+  PHONE: "400-123-2038"
+
+# ---------- L2 通用常识的来源（Gate 2 逐条复核）----------
+sources:
+  - item: "老年助餐优惠"
+    basis: "社区老年助餐服务通行做法（价格与优惠以运营方公示为准）"
+    level: L2
+
+# ---------- 待人类确认（未填齐不得出图）----------
+needs_human:
+  - "菜品与价格（示例值，发布前必须替换）"
+  - "优惠年龄门槛与办卡押金"
+  - "是否提供送餐"
+  - "运营方全称与食品经营许可信息"
+
+# ---------- 骨架与分类专属校验 ----------
+checks:
+  - "L5 商业便民 → 严禁使用政务视觉语言（徽标、国标警示色、公文版式）"
+  - "价格必须由运营方提供并逐字核对，不得自行拟定"
+  - "行数对齐：英文行数 ≤ 中文行数 + 1 且 ≤ 3 行（references/03-line-parity.md）"
+  - "母本 10 项字符级 100% 命中；电话两版字符一致"

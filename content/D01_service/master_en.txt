@@ -1,0 +1,49 @@
+# ==========================================================
+# D01 · 政务办事与证照 —— English master copy (verbatim, locked)
+# Theme: Residence Permit Application Guide
+# Skeleton S2（步骤流程型） | Authority L2 | Timeliness T1 | Audience A01/A06
+# Canvas: screen 4:5 (1080x1350 PNG-24 sRGB) + A3 print (297x420 mm, 3 mm bleed)
+# Punctuation: half-width , . : | serial (Oxford) comma | ASCII hyphen "-"
+# Line parity: English chars <= 2 x Chinese chars; at most +1 line, never > 3 lines
+# Rule: the AI may only carry and typeset this text - never rewrite, shorten, or restyle it
+# Version: v1.0 | Proper nouns and times are sample values; replace before publishing
+# ==========================================================
+
+[01] Organisation
+Community Service Center
+
+[02] Title
+Residence Permit Application Guide
+
+[03] Trigger notice
+Registered here six months? You can apply.
+
+[04] Audience
+Open to non-local residents and their families.
+
+[05] Step 1
+Register at the window with ID and address proof.
+
+[06] Step 2
+Have your photo taken and fill in the form.
+
+[07] Step 3
+Card issued within 15 working days.
+
+[08] Step 4
+Collect with your receipt after the SMS notice.
+
+[09] Precautions
+Missing documents? You can supplement later.
+
+[10] Time and place
+Service window: Window 3, Community Service Center. Mon-Fri 9:00-17:00.
+
+[11] Information line
+Information line: 400-123-2021
+
+# ----------------------------------------------------------
+# Checks: 11 items | half-width punctuation | Oxford comma in 3+ lists
+# Phone string identical to the Chinese version | no ALL CAPS
+# Never add promises not present in the source (free, 24 hours, guaranteed, etc.)
+# ----------------------------------------------------------

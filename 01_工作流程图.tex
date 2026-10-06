@@ -1,0 +1,225 @@
+% 01_工作流程图.tex
+% 社区服务信息主视觉设计 · Agent Skill 工作流程图（14 节点 + 5 Human Gate）
+% 配色规范遵循课程要求：青蓝圆角矩形 = AI 任务；橙色菱形 = Human Gate；
+%                       白底灰框 = 输入/输出/中间产物；橙色虚线箭头 = 回退路径
+% 编译：xelatex -jobname=flowchart 01_工作流程图.tex
+\documentclass[border=0pt,10pt]{standalone}
+\usepackage{xeCJK}
+\setCJKmainfont{PingFang SC}
+\setCJKsansfont{PingFang SC}
+\xeCJKDeclareCharClass{CJK}{"2460 -> "2473, "2265, "2264, "2192}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.geometric,arrows.meta,backgrounds}
+\usepackage{xcolor}
+
+% ---------- 调色板（课堂规范 + 自有辅助色） ----------
+\definecolor{aifill}{HTML}{CFE7EC}   % 青蓝浅底
+\definecolor{aiedge}{HTML}{0F6E80}   % 青蓝边框
+\definecolor{aiink}{HTML}{0A3944}
+\definecolor{gfill}{HTML}{FBDFBC}    % 橙色浅底
+\definecolor{gedge}{HTML}{D2731A}    % 橙色边框
+\definecolor{gateink}{HTML}{6E3703}
+\definecolor{ink}{HTML}{1B2A38}
+\definecolor{muted}{HTML}{5A6B7B}
+\definecolor{hair}{HTML}{D8E0E8}
+\definecolor{panelbg}{HTML}{F5F8FB}
+\definecolor{softblue}{HTML}{EAF2FA}
+
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\useasboundingbox (0,0) rectangle (42,29.7);
+\fill[white] (0,0) rectangle (42,29.7);
+
+\tikzset{
+  ai/.style={rectangle, rounded corners=5pt, draw=aiedge, fill=aifill, line width=0.9pt,
+             align=center, inner sep=3pt, text=aiink, minimum height=2.25cm, text width=3.95cm},
+  io/.style={rectangle, rounded corners=1.5pt, draw=hair, fill=white, line width=0.9pt,
+             align=center, inner sep=3pt, text=ink, minimum height=2.25cm, text width=3.95cm},
+  gate/.style={diamond, aspect=1.5, draw=gedge, fill=gfill, line width=1pt,
+               align=center, inner sep=1pt, text=gateink, minimum height=2.4cm, text width=1.72cm},
+  flow/.style={-{Latex[length=2.6mm,width=1.9mm]}, draw=ink, line width=1pt},
+  roll/.style={-{Latex[length=2.2mm,width=1.6mm]}, draw=gedge, dashed, line width=0.9pt,
+               dash pattern=on 2.2mm off 1.4mm, rounded corners=3pt},
+}
+\def\tfont{\fontsize{7.4}{8.8}\selectfont}
+\def\bfont{\fontsize{5.9}{7.1}\selectfont}
+
+% ============================================================
+% 页眉
+% ============================================================
+\fill[ink] (1.8,28.35) rectangle (1.92,28.95);
+\node[anchor=west,inner sep=0pt,font=\fontsize{20}{23}\selectfont\bfseries,text=ink]
+  at (2.14,28.65) {社区服务信息主视觉设计 · Agent Skill 工作流程图};
+\node[anchor=west,inner sep=0pt,font=\fontsize{8}{10}\selectfont,text=muted]
+  at (2.16,27.88) {通用底座：15 类社区服务信息分支 × 9 种版式骨架 \quad|\quad 锁定输出：画布统一 A3 竖版（297×420 mm · 3 mm 出血）· 每语言 PNG + PDF · 受众含国际居民才出英文版\quad|\quad 铁律：母本零改写 · 冻结前 AI 无权 · 每 Gate 必有回退线};
+
+\foreach \i/\num/\lab in {0/14/节点,1/5/Human Gate,2/5/回退线,3/0/主干断点}{
+  \pgfmathsetmacro{\cx}{40.2-(4-\i)*3.05}
+  \fill[panelbg,rounded corners=2pt] (\cx,27.5) rectangle (\cx+2.85,28.95);
+  \node[anchor=west,inner sep=0pt,font=\fontsize{13}{15}\selectfont\bfseries,text=aiedge] at (\cx+0.18,28.5) {\num};
+  \node[anchor=west,inner sep=0pt,font=\fontsize{6.2}{7.4}\selectfont,text=muted] at (\cx+0.18,27.78) {\lab};
+}
+
+% ============================================================
+% 图例（课堂配色规范自证）
+% ============================================================
+\fill[panelbg,rounded corners=3pt] (1.8,25.85) rectangle (40.2,27.15);
+\node[anchor=west,inner sep=0pt,font=\fontsize{7}{8}\selectfont\bfseries,text=ink] at (2.05,26.85) {图形规范};
+\fill[aifill,rounded corners=3pt,draw=aiedge,line width=0.8pt] (3.5,26.35) rectangle (4.7,26.95);
+\node[anchor=west,inner sep=0pt,font=\fontsize{7.2}{8.4}\selectfont,text=ink] at (4.86,26.65) {青蓝圆角矩形 = AI 任务};
+\fill[gfill,draw=gedge,line width=0.9pt] (12.3,26.65) ++(-0.5,0) -- ++(0.5,0.42) -- ++(0.5,-0.42) -- ++(-0.5,-0.42) -- cycle;
+\node[anchor=west,inner sep=0pt,font=\fontsize{7.2}{8.4}\selectfont,text=ink] at (13.45,26.65) {橙色菱形 = Human Gate（人工判断点）};
+\fill[white,draw=hair,line width=0.8pt] (24.6,26.35) rectangle (25.8,26.95);
+\node[anchor=west,inner sep=0pt,font=\fontsize{7.2}{8.4}\selectfont,text=ink] at (25.96,26.65) {白底灰框 = 输入 / 输出（产物写在节点内）};
+\draw[roll] (36.2,26.65) -- (37.6,26.65);
+\node[anchor=west,inner sep=0pt,font=\fontsize{7.2}{8.4}\selectfont,text=ink] at (37.68,26.65) {橙色虚线 = 不通过的回退路径};
+
+% ============================================================
+% 分类体系侧栏（挂在 N2 上方）
+% ============================================================
+\fill[white,rounded corners=3pt,draw=aiedge,line width=0.7pt,dashed] (6.2,23.95) rectangle (17.6,25.5);
+\node[anchor=west,inner sep=0pt,font=\fontsize{7.4}{8.8}\selectfont\bfseries,text=aiedge] at (6.5,25.15) {N2 的判定依据：本 Skill 的通用分类底座};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8}\selectfont,text=ink] at (6.5,24.62)
+  {15 类服务领域（D01–D15）\quad × \quad 9 种版式骨架（S1–S9）\quad × \quad 8 类受众};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8}\selectfont,text=ink] at (6.5,24.2)
+  {4 类时效（T1–T4）\quad × \quad 5 个权威等级（L1–L5）\quad → \quad 输出一份 theme.yaml};
+\draw[dashed,draw=aiedge,line width=0.6pt] (10.07,23.95) -- (10.07,22.55);
+
+% ============================================================
+% 分段标题
+% ============================================================
+\node[anchor=west,inner sep=0pt,font=\fontsize{7}{8.4}\selectfont\bfseries,text=muted] at (1.8,23.2)
+  {第 1 段 · 输入 → 冻结（N1–N4 · G1–G3）};
+\node[anchor=east,inner sep=0pt,font=\fontsize{7}{8.4}\selectfont\bfseries,text=muted] at (40.2,17.75)
+  {第 2 段 · 成稿（N5–N9 · G4）};
+\node[anchor=east,inner sep=0pt,font=\fontsize{7}{8.4}\selectfont\bfseries,text=muted] at (40.2,11.45)
+  {第 3 段 · 校验与交付（N10–N14 · G5）};
+
+% ============================================================
+% 第 1 行（左 → 右）
+% ============================================================
+\node[io,anchor=west] (N1) at (1.8,21.4) {\textbf{\tfont N1\ 经典输入包}\\[2.5pt]
+  \bfont brief · 服务对象 · 服务事项\\ 时间地点 · 行动步骤 · 注意事项\\ 图形素材 · 机构事实清单};
+\node[ai,anchor=west] (N2) at (7.867,21.4) {\textbf{\tfont N2\ 主题分类与路由}\\[2.5pt]
+  \bfont 产物：theme.yaml\\ 领域 D01–D15 · 骨架 S1–S9\\ 受众 · 时效 · 权威等级};
+\node[gate] (G1) at (15.733,21.4) {\fontsize{6.6}{8}\selectfont\bfseries G1\\ 分类与\\ 路由确认};
+\node[ai,anchor=west] (N3) at (19.2,21.4) {\textbf{\tfont N3\ 事实结构化}\\[2.5pt]
+  \bfont 产物：fact-table.md\\ 图形素材清单\\ 官方来源记录};
+\node[gate] (G2) at (27.067,21.4) {\fontsize{6.6}{8}\selectfont\bfseries G2\\ 事实与\\ 母本校对};
+\node[ai,anchor=west] (N4) at (30.533,21.4) {\textbf{\tfont N4\ 方向候选生成}\\[2.5pt]
+  \bfont 产物：视觉方向 ≥3\\ + Tokens 建议\\ 只描述、不落地};
+\node[gate] (G3) at (38.4,21.4) {\fontsize{6.6}{8}\selectfont\bfseries G3\\ 设计系统\\ 冻结};
+
+\draw[flow] (N1.east) -- (N2.west);
+\draw[flow] (N2.east) -- (G1.west);
+\draw[flow] (G1.east) -- (N3.west);
+\draw[flow] (N3.east) -- (G2.west);
+\draw[flow] (G2.east) -- (N4.west);
+\draw[flow] (N4.east) -- (G3.west);
+
+% 第 1 段回退线
+\draw[roll] (G1.south) -- (15.733,18.75) -- (10.067,18.75) -- (10.067,20.3);
+\draw[roll] (G2.south) -- (27.067,18.75) -- (21.4,18.75) -- (21.4,20.3);
+\draw[roll] (G3.south) -- (38.4,18.75) -- (32.733,18.75) -- (32.733,20.3);
+\node[anchor=center,inner sep=1.5pt,fill=white,font=\fontsize{6.2}{7.4}\selectfont,text=gedge] at (12.9,18.75) {不通过回 N2};
+\node[anchor=center,inner sep=1.5pt,fill=white,font=\fontsize{6.2}{7.4}\selectfont,text=gedge] at (24.25,18.75) {不通过回 N3};
+\node[anchor=center,inner sep=1.5pt,fill=white,font=\fontsize{6.2}{7.4}\selectfont,text=gedge] at (35.6,18.75) {不通过回 N4};
+
+% ============================================================
+% 第 2 行（右 → 左）
+% ============================================================
+\node[ai,anchor=west] (N5) at (35.8,15.6) {\textbf{\tfont N5\ 主视觉线框}\\[2.5pt]
+  \bfont 产物：2–3 版骨架线框\\ 按已冻结的骨架 S1–S9\\ 只定结构、不做修饰};
+\node[ai,anchor=west] (N6) at (28.84,15.6) {\textbf{\tfont N6\ 图形素材统一化}\\[2.5pt]
+  \bfont 产物：图标清单\\ 线宽 · 圆角 · 用色规则\\ 素材授权记录};
+\node[ai,anchor=west] (N7) at (21.88,15.6) {\textbf{\tfont N7\ 中文版入版排版}\\[2.5pt]
+  \bfont 产物：poster-cn 成稿\\ 母本零改写入版\\ 字号阶梯 · 对比度达标};
+\node[gate] (G4) at (17.52,15.6) {\fontsize{6.6}{8}\selectfont\bfseries G4\\ 内容与\\ 可读性};
+\node[ai,anchor=west] (N8) at (8.76,15.6) {\textbf{\tfont N8\ 英文版本地化重排}\\[2.5pt]
+  \bfont 产物：poster-en 成稿\\ 仅双语主题（含 A06）\\ 受众无国际居民则跳过};
+\node[ai,anchor=west] (N9) at (1.8,15.6) {\textbf{\tfont N9\ 派生物料询问与生成}\\[2.5pt]
+  \bfont 先问用户是否需要：\\ 信息卡 · 群消息图\\ 导视牌 · 折页};
+
+\draw[flow] (N5.west) -- (N6.east);
+\draw[flow] (N6.west) -- (N7.east);
+\draw[flow] (N7.west) -- (G4.east);
+\draw[flow] (G4.west) -- (N8.east);
+\draw[flow] (N8.west) -- (N9.east);
+
+% 第 2 段回退线
+\draw[roll] (G4.south) -- (17.52,12.7) -- (24.08,12.7) -- (24.08,14.5);
+\node[anchor=center,inner sep=1.5pt,fill=white,font=\fontsize{6.2}{7.4}\selectfont,text=gedge] at (20.8,12.7) {不通过回 N7};
+
+% ============================================================
+% 第 3 行（左 → 右）
+% ============================================================
+\node[gate] (G5) at (3.6,9.8) {\fontsize{6.6}{8}\selectfont\bfseries G5\\ 双语与\\ 对外责任};
+\node[ai,anchor=west] (N10) at (7.96,9.8) {\textbf{\tfont N10\ 授权与合规核查}\\[2.5pt]
+  \bfont 产物：合规记录\\ 字体 · 素材 · 肖像 · 标识\\ 不新增原文没有的承诺};
+\node[ai,anchor=west] (N11) at (14.92,9.8) {\textbf{\tfont N11\ 导出与命名}\\[2.5pt]
+  \bfont 产物：A3 画布 PNG + PDF\\ 3 mm 出血 · 裁切线\\ 每语言 2 个文件};
+\node[ai,anchor=west] (N12) at (21.88,9.8) {\textbf{\tfont N12\ 自动化校验}\\[2.5pt]
+  \bfont 产物：校验报告\\ 母本 100\% 比对\\ 字号 / 对比度 / 禁止元素};
+\node[ai,anchor=west] (N13) at (28.84,9.8) {\textbf{\tfont N13\ 技能包打包}\\[2.5pt]
+  \bfont 产物：SKILL.md\\ references · scripts\\ adapters · CHANGELOG};
+\node[io,anchor=west] (N14) at (35.8,9.8) {\textbf{\tfont N14\ 交付物}\\[2.5pt]
+  \bfont 中文版 PNG + PDF\\ 英文版（受众含国际居民时）\\ 校验报告 · SKILL.md 技能包};
+
+\draw[flow] (G5.east) -- (N10.west);
+\draw[flow] (N10.east) -- (N11.west);
+\draw[flow] (N11.east) -- (N12.west);
+\draw[flow] (N12.east) -- (N13.west);
+\draw[flow] (N13.east) -- (N14.west);
+
+% 第 3 段回退线（G5 回到第 2 段的 N8）
+\draw[roll] (G5.north) -- (3.6,11.95) -- (10.96,11.95) -- (10.96,14.5);
+\node[anchor=center,inner sep=1.5pt,fill=white,font=\fontsize{6.2}{7.4}\selectfont,text=gedge] at (7.3,11.95) {不通过回 N8};
+
+% ============================================================
+% 蛇形主干连接（右侧下行 / 左侧下行）
+% ============================================================
+\draw[flow] (G3.east) -- (41.05,21.4) -- (41.05,15.6) -- (N5.east);
+\draw[flow] (N9.west) -- (0.95,15.6) -- (0.95,9.8) -- (G5.west);
+
+% ============================================================
+% 底部说明
+% ============================================================
+\fill[panelbg,rounded corners=3pt] (1.8,4.2) rectangle (20.4,7.9);
+\node[anchor=west,inner sep=0pt,font=\fontsize{8}{9.6}\selectfont\bfseries,text=ink] at (2.1,7.5) {责任划分判据（谁做这个节点）};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.8}{8.4}\selectfont,text=aiedge] at (2.1,6.95) {交给 AI};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=ink] at (4.3,6.95) {重复性高 · 可结构化 · 需要多候选 · 可快速检查 · 错误可回退};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.8}{8.4}\selectfont,text=gedge] at (2.1,6.35) {留给人};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=ink] at (4.3,6.35) {模糊度高 · 后果重 · 涉及审美 / 伦理 / 事实责任};
+\draw[hair,line width=0.5pt] (2.1,5.95) -- (20.1,5.95);
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=muted] at (2.1,5.55)
+  {本图 14 个节点 = 12 个 AI 任务（青蓝）+ 2 个输入/输出（白框）；5 个判定动作全部留给人（橙色菱形）；};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=muted] at (2.1,5.05)
+  {所有事实、审美方向、对外口径与冻结签字均不在 AI 权限内 —— 违反即停止并抛出 NEEDS\_HUMAN。};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=muted] at (2.1,4.55)
+  {注意：图中不出现任何具体机构名、电话、地名 —— 这些是 \textbf{人类必填项}，在 SKILL.md 中以占位符呈现。};
+
+\fill[panelbg,rounded corners=3pt] (21.4,4.2) rectangle (40.2,7.9);
+\node[anchor=west,inner sep=0pt,font=\fontsize{8}{9.6}\selectfont\bfseries,text=ink] at (21.7,7.5) {翻译成 SKILL.md（六步法第 6 步）};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.8}{8.4}\selectfont,text=ink] at (21.7,6.95)
+  {节点 \ $\rightarrow$ \ 编号步骤 N1–N14 \quad|\quad 菱形 \ $\rightarrow$ \ \textbf{[HUMAN GATE]} \quad|\quad 橙色虚线 \ $\rightarrow$ \ 「不通过回步骤 N」};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.8}{8.4}\selectfont,text=ink] at (21.7,6.45)
+  {5 个 Gate 的判定问题：分类对不对 · 事实准不准 · 方向冻不冻 · 中文读得懂吗 · 对外能不能发};
+\draw[hair,line width=0.5pt] (21.7,6.05) -- (39.9,6.05);
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=muted] at (21.7,5.65)
+  {自检：节点数 14（课程要求 10–14）· Human Gate 5（要求 ≥3）· 回退线 5 条（每个 Gate 一条）};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=muted] at (21.7,5.15)
+  {断点检查：N1 → N14 每个中间产物都有下游消费者；派生物料为可选分支，不阻断主干};
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.6}{8.2}\selectfont,text=muted] at (21.7,4.65)
+  {跨分支适配：换主题只需新增 \ content/ 内容包，本流程与 5 个 Gate 完全复用。};
+
+% ============================================================
+% 页脚
+% ============================================================
+\draw[hair,line width=0.5pt] (1.8,3.35) -- (40.2,3.35);
+\node[anchor=west,inner sep=0pt,font=\fontsize{6.4}{7.8}\selectfont,text=muted] at (1.8,2.85)
+  {配套文件：01\_工作流程图.mmd（Mermaid 源码，可编辑） · 02\_SKILL.md（14 步 + 5 个 [HUMAN GATE] + 冻结清单与待填清单） · 分类底座见 ../高温防护海报Skill制作包/06 与 taxonomy.yaml};
+\node[anchor=east,inner sep=0pt,font=\fontsize{6.4}{7.8}\selectfont,text=muted] at (40.2,2.85)
+  {工作流程图 v1.0 \quad|\quad A3 横版 \quad|\quad xelatex + TikZ 生成};
+
+\end{tikzpicture}
+\end{document}

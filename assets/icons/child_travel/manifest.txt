@@ -1,0 +1,16 @@
+儿童|tabler:mood-kid
+步行护送|tabler:walk
+斑马线道路|tabler:road
+红绿灯|tabler:traffic-lights
+校车公交|tabler:bus
+学校区域|tabler:school
+安全头盔|tabler:helmet
+安全带|mdi:seatbelt
+自行车电动车|tabler:bike
+汽车|tabler:car
+不看手机|tabler:phone-off
+停车让行|tabler:hand-stop
+当心警示|noto:warning
+禁止|mdi:block-helper
+集合点|tabler:map-pin
+集合时间|tabler:clock

@@ -1,0 +1,91 @@
+% 02_AI人任务分配表.tex —— 作业要求② ｜ A3 横版
+% 编译：xelatex -jobname=tasktable 02_AI人任务分配表.tex
+\documentclass[10pt]{article}
+\usepackage[a3paper,landscape,margin=10mm]{geometry}
+\usepackage{xeCJK}
+\setCJKmainfont{PingFang SC}
+\setCJKsansfont{PingFang SC}
+\xeCJKDeclareCharClass{CJK}{"2460 -> "2473, "2265, "2264, "2192}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\definecolor{ink}{HTML}{1B2A38}
+\definecolor{headbg}{HTML}{19324D}
+\definecolor{hair}{HTML}{C9D6E2}
+\definecolor{airow}{HTML}{EDF5F8}
+\definecolor{gaterow}{HTML}{FDF1E0}
+\definecolor{aiedge}{HTML}{0F6E80}
+\definecolor{gedge}{HTML}{C2701A}
+\definecolor{muted}{HTML}{5A6B7B}
+
+\newcommand{\thd}[1]{\textcolor{white}{\fontsize{11}{13}\selectfont\bfseries #1}}
+\newcommand{\tcell}[1]{\fontsize{9}{11}\selectfont #1}
+\newcommand{\tname}[1]{\fontsize{9.4}{11.4}\selectfont\bfseries #1}
+\newcommand{\ownai}{\centering\fontsize{10}{12}\selectfont\textbf{\textcolor{aiedge}{AI}}}
+\newcommand{\ownhu}{\centering\fontsize{10}{12}\selectfont\textbf{\textcolor{gedge}{人}}}
+
+\begin{document}
+
+{\fontsize{22}{26}\selectfont\bfseries\textcolor{ink}{社区服务信息主视觉设计 · AI–人任务分配表}}\\[2mm]
+{\fontsize{10}{12}\selectfont\textcolor{muted}{14 个节点 + 5 个人工判断点（Human Gate）｜ Owner 两值：AI / 人 ｜ 退出条件 = 量化判据 + 回退目标 ｜ 与《工作流程图》N1–N14、G1–G5 逐行对应}}\\[3mm]
+
+\renewcommand{\arraystretch}{2.05}
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.7cm}%
+>{\raggedright\arraybackslash}p{5.4cm}%
+>{\raggedright\arraybackslash}p{7.2cm}%
+>{\raggedright\arraybackslash}p{6.3cm}%
+>{\centering\arraybackslash}p{1.5cm}%
+>{\raggedright\arraybackslash}p{13.4cm}@{}}
+\rowcolor{headbg}
+\thd{节点} & \thd{输入} & \thd{动作} & \thd{输出} & \thd{Owner} & \thd{退出条件（量化判据 + 回退目标）} \\
+\hline
+
+\rowcolor{airow}
+\tname{N1 接收输入包与归类} & \tcell{用户 brief、六类经典输入、图形素材} & \tcell{按六类逐条拆分归类；原文逐字，不改写} & \tcell{intake.md（含缺类登记）} & \ownai & \tcell{六类全覆盖且逐字锁定；缺项写入 needs-human 并说明影响（不阻断流程）} \\
+\rowcolor{airow}
+\tname{N2 主题分类与路由} & \tcell{intake.md} & \tcell{判五轴 + 选唯一主骨架 + 判语言版本} & \tcell{theme.yaml} & \ownai & \tcell{五轴取值合法（D01–D15 / S1–S9 / A / T / L）；language 与受众一致；命中 S7 / S8 即停} \\
+\rowcolor{gaterow}
+\tname{G1 分类与路由确认} & \tcell{theme.yaml} & \tcell{复核五字段、主骨架、受众、语言版本} & \tcell{gate1.md（签字）} & \ownhu & \tcell{五字段与骨架全对、受众无遗漏并签字；\textbf{不通过回步骤 2}} \\
+\rowcolor{airow}
+\tname{N3 事实结构化} & \tcell{intake.md、官方来源} & \tcell{展开字段表；按 L0–L3 标注来源与级别} & \tcell{fact-table.md、素材清单、source.md} & \ownai & \tcell{每条信息有来源；L3 待填项全部占位化并登记} \\
+\rowcolor{gaterow}
+\tname{G2 事实与母本校对} & \tcell{fact-table.md、母本} & \tcell{逐字核对（标点 / 空格 / 全半角 / 电话）} & \tcell{gate2.md（签字）} & \ownhu & \tcell{字符级 100\% 一致且来源可追溯；\textbf{不通过回步骤 3（母本缺失回 1）}} \\
+\rowcolor{airow}
+\tname{N4 方向候选生成} & \tcell{theme.yaml、fact-table.md} & \tcell{出 ≥3 个视觉方向候选 + Tokens 建议} & \tcell{candidates.md} & \ownai & \tcell{≥3 个方向，每个含“是什么 / 不是什么 / 风险”；只描述不落地} \\
+\rowcolor{gaterow}
+\tname{G3 设计系统冻结} & \tcell{candidates.md} & \tcell{选定 1 个方向，冻结 Design Tokens} & \tcell{design-tokens.json、freeze-record.md} & \ownhu & \tcell{色值 / 字体授权 / 字号阶梯 / 必含与禁止全部定稿并签字；\textbf{不通过回步骤 4}} \\
+\rowcolor{airow}
+\tname{N5 主视觉线框} & \tcell{冻结 Tokens、fact-table.md} & \tcell{按主骨架出 2–3 版结构线框} & \tcell{wireframes/} & \ownai & \tcell{2–3 版、只定信息层级不含修饰；每版标注骨架编号 S1–S9} \\
+\rowcolor{airow}
+\tname{N6 图形素材统一化} & \tcell{图标需求清单} & \tcell{统一线宽 / 圆角 / 用色；登记素材授权} & \tcell{icon-list.md、assets/} & \ownai & \tcell{图标风格一致；每项素材有来源与授权记录} \\
+\rowcolor{airow}
+\tname{N7 中文版入版排版} & \tcell{线框、冻结 Tokens、母本} & \tcell{按 A3 画布（默认 297×420 mm）入版；正文 ≥26 pt} & \tcell{poster-cn（A3 画布）} & \ownai & \tcell{母本 100\% 入版；字号与对比度达受众阈值；出血与裁切线正确} \\
+\rowcolor{gaterow}
+\tname{G4 内容与可读性确认} & \tcell{poster-cn} & \tcell{查完整性、可读性、禁止元素、A3 几何} & \tcell{gate4.md（签字）} & \ownhu & \tcell{无缺项、电话不跨行、安全边距 ≥18 mm；\textbf{不通过回步骤 7（骨架问题回 5）}} \\
+\rowcolor{airow}
+\tname{N8 英文本地化重排} & \tcell{poster-cn、language = bilingual\newline(仅双语主题)} & \tcell{独立重排，不套用中文行结构；压缩到行数齐平} & \tcell{poster-en（A3 画布）} & \ownai & \tcell{信息等价无删词；每条行数齐平或 +1；zh-only 主题跳过并记录原因} \\
+\rowcolor{airow}
+\tname{N9 派生物料询问与生成} & \tcell{用户答复} & \tcell{先问是否需要派生；确认后同系统生成} & \tcell{derivatives/、确认记录} & \ownai & \tcell{未确认不生成；记录写明问了什么 / 答了什么 / 产物清单} \\
+\rowcolor{gaterow}
+\tname{G5 双语一致性与对外责任} & \tcell{中英成稿、派生记录} & \tcell{查双语等价、落款、时效、免责口径} & \tcell{gate5.md（签字）} & \ownhu & \tcell{两版等价且落款与时效齐全；\textbf{不通过回步骤 8（派生问题回 9）}} \\
+\rowcolor{airow}
+\tname{N10 授权与合规核查} & \tcell{字体 / 素材 / 肖像 / 标识} & \tcell{四项逐条核查并留证} & \tcell{compliance-record.md} & \ownai & \tcell{四项均有结论；无未授权素材、无未处理肖像} \\
+\rowcolor{airow}
+\tname{N11 导出与命名} & \tcell{成稿、冻结画布} & \tcell{按 A3 画布导出 PNG + PDF（含出血与裁切线）} & \tcell{dist/*.png、dist/*.pdf} & \ownai & \tcell{3508×4961 px（含出血 3579×5032）；命名合规；每语言 2 个文件} \\
+\rowcolor{airow}
+\tname{N12 自动化校验} & \tcell{dist/、母本、theme.yaml} & \tcell{跑校验脚本（16 项检查）} & \tcell{verify-report.md} & \ownai & \tcell{0 错误；警告逐条说明或走豁免并写明理由} \\
+\rowcolor{airow}
+\tname{N13 技能包打包} & \tcell{全部产物} & \tcell{打包 SKILL.md + references + content + scripts} & \tcell{skill/ 技能包} & \ownai & \tcell{目录结构符合 Skill 规范；CHANGELOG 每个版本一行} \\
+\rowcolor{gaterow}
+\tname{N14 交付} & \tcell{技能包、dist/} & \tcell{人确认交付对象、有效期与撤换责任人} & \tcell{交付清单（31 项打勾）} & \ownhu & \tcell{必需项全齐；无 \{\{占位符\}\} 残留；发布主体与时效已确认} \\
+\hline
+\end{tabular}
+
+\vspace{3mm}
+{\fontsize{8.6}{10.4}\selectfont\textcolor{muted}{说明：① 表中 \textbf{\textcolor{aiedge}{AI}} 行 = 青蓝任务，\textbf{\textcolor{gedge}{人}} 行 = 橙色 Human Gate，与工作流程图配色一致；② N1 的“输入”来自人、N14 由人签字，故 Owner 分别标 AI 与 人；③ 退出条件中的“回步骤 N”即流程图的橙色虚线回退路径；④ 尺寸默认 A3 竖版 297×420 mm，用户指定其他尺寸时以其为准（见 SKILL.md 尺寸决策规则）。}}
+
+\end{document}

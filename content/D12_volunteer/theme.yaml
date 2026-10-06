@@ -1,0 +1,76 @@
+# content/D12_volunteer/theme.yaml
+# D12 志愿与公益 —— 社区志愿者招募
+# 五轴分类（见 taxonomy.yaml）+ 槽位 + L2 来源 + 待人类确认 + 骨架专属校验
+# 由 0_生成工具/生成内容包.py 生成，勿手改（改数据源后重跑）
+
+theme_id: D12_volunteer
+title_zh: "社区志愿者招募"
+title_en: "Community Volunteers Wanted"
+
+# ---------- 语言版本（v1.4 规则）----------
+language: zh-only          # bilingual（受众含 A06 国际居民）| zh-only（仅中文）
+language_rule: "受众含 A06 → 出中英双语；否则只出中文海报与相关内容"
+
+# ---------- 风格来源（v1.6：先按五大类，15 类暂不细分）----------
+family: F5                    # 文化与参与
+style_ref: references/05-style-spec.md#F5
+style_status: 待填（人类补全五大类风格要求表后自动生效；本类继承 F5，不单独改）
+
+# ---------- 五轴 ----------
+domain: D12
+function: S6
+audience: [A01]
+audience_status: "AI 按主题拟定，待用户确认"   # 用户给出受众时以用户为准
+timeliness: T2
+authority: L4
+skeleton: S6
+
+# ---------- 画布：默认固定 A3（用户指定尺寸时才改，见 04_SKILL.md 尺寸决策规则）----------
+canvas:
+  size_mm: [297, 420]            # 默认 A3 竖版（裁切线内）；用户指定其他尺寸时以其为准
+  ratio: "1:1.414"
+  bleed_mm: 3
+  total_mm: [303, 426]
+  px_300dpi: [3508, 4961]        # 成品
+  px_300dpi_bleed: [3579, 5032]  # 含出血
+  format: [PNG, PDF]             # PNG 供屏幕/微信，PDF 供打印店
+  color: sRGB
+  transparent: false
+  safe_margin_mm: 18
+  body_font_min_pt: 26           # 含老年人/残障受众 → 31
+  crop_marks: true
+  design_units: [1080, 1527]     # 等比基准；每行容量 中文 25 字 / 英文 49 字符
+
+# ---------- 母本 ----------
+items: 10
+org: {zh: "社区志愿服务站", en: "Community Volunteer Service Station"}
+placeholders:                    # 全部为示例值，发布前必须替换
+  ORG_ZH: "社区志愿服务站"
+  ORG_EN: "Community Volunteer Service Station"
+  TITLE_ZH: "社区志愿者招募"
+  TITLE_EN: "Community Volunteers Wanted"
+  SITES_ZH: "社区服务中心 101 室"
+  SITES_EN: "Room 101, Community Service Center"
+  HOURS_ZH: "周一至周五 9:00-17:00"
+  HOURS_EN: "Mon-Fri 9:00-17:00"
+  PHONE: "400-123-2035"
+
+# ---------- L2 通用常识的来源（Gate 2 逐条复核）----------
+sources:
+  - item: "志愿服务时长记录"
+    basis: "志愿服务记录与证明出具办法（时长以平台记录为准）"
+    level: L2
+
+# ---------- 待人类确认（未填齐不得出图）----------
+needs_human:
+  - "是否提供志愿服务证明与保险"
+  - "岗位实际需求与服务时段"
+  - "报名二维码是否可用"
+  - "年龄门槛是否为 16 周岁"
+
+# ---------- 骨架与分类专属校验 ----------
+checks:
+  - "L4 社区自治 → 语气可亲和，但不得冒充政府公告"
+  - "S6：报名方式与截止时间必须显眼"
+  - "行数对齐：英文行数 ≤ 中文行数 + 1 且 ≤ 3 行（references/03-line-parity.md）"
+  - "母本 10 项字符级 100% 命中；电话两版字符一致"

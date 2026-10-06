@@ -1,0 +1,76 @@
+# content/D07_lift/theme.yaml
+# D07 住房与物业 —— 既有住宅加装电梯流程
+# 五轴分类（见 taxonomy.yaml）+ 槽位 + L2 来源 + 待人类确认 + 骨架专属校验
+# 由 0_生成工具/生成内容包.py 生成，勿手改（改数据源后重跑）
+
+theme_id: D07_lift
+title_zh: "既有住宅加装电梯流程"
+title_en: "Adding a Lift to an Existing Building"
+
+# ---------- 语言版本（v1.4 规则）----------
+language: zh-only          # bilingual（受众含 A06 国际居民）| zh-only（仅中文）
+language_rule: "受众含 A06 → 出中英双语；否则只出中文海报与相关内容"
+
+# ---------- 风格来源（v1.6：先按五大类，15 类暂不细分）----------
+family: F3                    # 居住与环境
+style_ref: references/05-style-spec.md#F3
+style_status: 待填（人类补全五大类风格要求表后自动生效；本类继承 F3，不单独改）
+
+# ---------- 五轴 ----------
+domain: D07
+function: S2
+audience: [A01, A02]
+audience_status: "AI 按主题拟定，待用户确认"   # 用户给出受众时以用户为准
+timeliness: T3
+authority: L3
+skeleton: S2
+
+# ---------- 画布：默认固定 A3（用户指定尺寸时才改，见 04_SKILL.md 尺寸决策规则）----------
+canvas:
+  size_mm: [297, 420]            # 默认 A3 竖版（裁切线内）；用户指定其他尺寸时以其为准
+  ratio: "1:1.414"
+  bleed_mm: 3
+  total_mm: [303, 426]
+  px_300dpi: [3508, 4961]        # 成品
+  px_300dpi_bleed: [3579, 5032]  # 含出血
+  format: [PNG, PDF]             # PNG 供屏幕/微信，PDF 供打印店
+  color: sRGB
+  transparent: false
+  safe_margin_mm: 18
+  body_font_min_pt: 26           # 含老年人/残障受众 → 31
+  crop_marks: true
+  design_units: [1080, 1527]     # 等比基准；每行容量 中文 25 字 / 英文 49 字符
+
+# ---------- 母本 ----------
+items: 11
+org: {zh: "社区物业服务中心", en: "Community Property Service Center"}
+placeholders:                    # 全部为示例值，发布前必须替换
+  ORG_ZH: "社区物业服务中心"
+  ORG_EN: "Community Property Service Center"
+  TITLE_ZH: "既有住宅加装电梯流程"
+  TITLE_EN: "Adding a Lift to an Existing Building"
+  SITES_ZH: "社区物业服务中心"
+  SITES_EN: "Community Property Service Center"
+  HOURS_ZH: "周一至周五 9:00-17:00"
+  HOURS_EN: "Mon-Fri 9:00-17:00"
+  PHONE: "400-123-2028"
+
+# ---------- L2 通用常识的来源（Gate 2 逐条复核）----------
+sources:
+  - item: "业主同意比例与公示要求"
+    basis: "《民法典》关于既有住宅加装电梯的表决与公示规定（比例以本市细则为准）"
+    level: L2
+
+# ---------- 待人类确认（未填齐不得出图）----------
+needs_human:
+  - "本市同意比例的准确表述（三分之二 / 双三分之二）"
+  - "公示天数是否为 10 天"
+  - "费用分摊是否另有政府补贴"
+  - "低层住户补偿机制是否存在"
+
+# ---------- 骨架与分类专属校验 ----------
+checks:
+  - "S2：步骤顺序不可打乱；涉及利益冲突 → 措辞须经 Gate 2 逐字核对"
+  - "不得承诺“政府补贴”“免费安装”"
+  - "行数对齐：英文行数 ≤ 中文行数 + 1 且 ≤ 3 行（references/03-line-parity.md）"
+  - "母本 11 项字符级 100% 命中；电话两版字符一致"

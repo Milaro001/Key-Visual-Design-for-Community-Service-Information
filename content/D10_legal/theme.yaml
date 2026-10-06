@@ -1,0 +1,83 @@
+# content/D10_legal/theme.yaml
+# D10 法律与调解 —— 法律援助与人民调解
+# 五轴分类（见 taxonomy.yaml）+ 槽位 + L2 来源 + 待人类确认 + 骨架专属校验
+# 由 0_生成工具/生成内容包.py 生成，勿手改（改数据源后重跑）
+
+theme_id: D10_legal
+title_zh: "法律援助与人民调解"
+title_en: "Legal Aid and Mediation"
+
+# ---------- 语言版本（v1.4 规则）----------
+language: zh-only          # bilingual（受众含 A06 国际居民）| zh-only（仅中文）
+language_rule: "受众含 A06 → 出中英双语；否则只出中文海报与相关内容"
+
+# ---------- 风格来源（v1.6：先按五大类，15 类暂不细分）----------
+family: F4                    # 安全与秩序
+style_ref: references/05-style-spec.md#F4
+style_status: 待填（人类补全五大类风格要求表后自动生效；本类继承 F4，不单独改）
+
+# ---------- 五轴 ----------
+domain: D10
+function: S3
+audience: [A01]
+audience_status: "AI 按主题拟定，待用户确认"   # 用户给出受众时以用户为准
+timeliness: T1
+authority: L2
+skeleton: S3
+
+# ---------- 画布：默认固定 A3（用户指定尺寸时才改，见 04_SKILL.md 尺寸决策规则）----------
+canvas:
+  size_mm: [297, 420]            # 默认 A3 竖版（裁切线内）；用户指定其他尺寸时以其为准
+  ratio: "1:1.414"
+  bleed_mm: 3
+  total_mm: [303, 426]
+  px_300dpi: [3508, 4961]        # 成品
+  px_300dpi_bleed: [3579, 5032]  # 含出血
+  format: [PNG, PDF]             # PNG 供屏幕/微信，PDF 供打印店
+  color: sRGB
+  transparent: false
+  safe_margin_mm: 18
+  body_font_min_pt: 26           # 含老年人/残障受众 → 31
+  crop_marks: true
+  design_units: [1080, 1527]     # 等比基准；每行容量 中文 25 字 / 英文 49 字符
+
+# ---------- 母本 ----------
+items: 10
+org: {zh: "社区法律服务站", en: "Community Legal Service Station"}
+placeholders:                    # 全部为示例值，发布前必须替换
+  ORG_ZH: "社区法律服务站"
+  ORG_EN: "Community Legal Service Station"
+  TITLE_ZH: "法律援助与人民调解"
+  TITLE_EN: "Legal Aid and Mediation"
+  SITES_ZH: "社区服务中心 105 室"
+  SITES_EN: "Room 105, Community Service Center"
+  HOURS_ZH: "周一至周五 9:00-17:00"
+  HOURS_EN: "Mon-Fri 9:00-17:00"
+  PHONE: "400-123-2033"
+
+# ---------- L2 通用常识的来源（Gate 2 逐条复核）----------
+sources:
+  - item: "人民调解不收费"
+    basis: "《人民调解法》关于人民调解不收取费用的规定"
+    level: L2
+  - item: "律师现场咨询"
+    basis: "公共法律服务通行做法（值守时间以本街道实际为准）"
+    level: L2
+  - item: "家暴报警"
+    basis: "《反家庭暴力法》与 110 报警（公共号码）"
+    level: L2
+
+# ---------- 待人类确认（未填齐不得出图）----------
+needs_human:
+  - "律师值班的准确时间与频次"
+  - "是否可代理诉讼"
+  - "法律援助的经济困难标准"
+  - "服务点房间号与办公时间"
+
+# ---------- 骨架与分类专属校验 ----------
+checks:
+  - "措辞法律风险高 → 不得给出实体法律结论"
+  - "S9：电话号码为主视觉且无遮挡"
+  - "110 为紧急号码，不得与非紧急事项同句"
+  - "行数对齐：英文行数 ≤ 中文行数 + 1 且 ≤ 3 行（references/03-line-parity.md）"
+  - "母本 10 项字符级 100% 命中；电话两版字符一致"

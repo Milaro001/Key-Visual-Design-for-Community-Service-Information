@@ -1,0 +1,29 @@
+\documentclass[border=8pt]{standalone}
+\usepackage{graphicx}
+\usepackage{xeCJK}\setCJKmainfont{PingFang SC}
+\usepackage{array}
+\newcommand{\cell}[3]{\begin{tabular}{@{}c@{}}\includegraphics[width=1.55cm]{#1}\\[0.6mm]{\fontsize{7.6}{9}\selectfont #2}\\[0.2mm]{\fontsize{5.8}{7}\selectfont #3}\end{tabular}}
+\begin{document}
+{\fontsize{13}{16}\selectfont\bfseries 儿童出行 · 图标元素（18 个 · 含 2 个国标符号）}\\[3mm]
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{cccccc}
+\cell{mdi_human-child.png}{儿童}{mdi} &
+\cell{mdi_human-male-child.png}{大人牵小孩}{mdi} &
+\cell{tabler_road.png}{斑马线道路}{tabler · MIT} &
+\cell{tabler_traffic-lights.png}{红绿灯}{tabler · MIT} &
+\cell{tabler_bus.png}{校车公交}{tabler · MIT} &
+\cell{mdi_school.png}{学校区域}{mdi}\\[2mm]
+\cell{tabler_helmet.png}{安全头盔}{tabler · MIT} &
+\cell{mdi_seatbelt.png}{安全带}{mdi} &
+\cell{tabler_bike.png}{自行车电动车}{tabler · MIT} &
+\cell{tabler_car.png}{汽车}{tabler · MIT} &
+\cell{tabler_phone-off.png}{不看手机}{tabler · MIT} &
+\cell{tabler_hand-stop.png}{停车让行}{tabler · MIT}\\[2mm]
+\cell{tabler_map-pin.png}{集合点}{tabler · MIT} &
+\cell{tabler_clock.png}{集合时间}{tabler · MIT} &
+\cell{noto_warning.png}{当心警示（彩色）}{noto} &
+\cell{mdi_block-helper.png}{禁止（库）}{mdi} &
+\cell{gb_prohibition.png}{国标禁止}{按 GB 几何生成} &
+\cell{gb_warning.png}{国标警告}{按 GB 几何生成}\\
+\end{tabular}
+\end{document}

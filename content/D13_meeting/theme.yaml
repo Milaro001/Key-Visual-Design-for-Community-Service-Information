@@ -1,0 +1,77 @@
+# content/D13_meeting/theme.yaml
+# D13 邻里自治与公共事务 —— 业主议事会公告
+# 五轴分类（见 taxonomy.yaml）+ 槽位 + L2 来源 + 待人类确认 + 骨架专属校验
+# 由 0_生成工具/生成内容包.py 生成，勿手改（改数据源后重跑）
+
+theme_id: D13_meeting
+title_zh: "业主议事会公告"
+title_en: "Owners' Meeting Notice"
+
+# ---------- 语言版本（v1.4 规则）----------
+language: zh-only          # bilingual（受众含 A06 国际居民）| zh-only（仅中文）
+language_rule: "受众含 A06 → 出中英双语；否则只出中文海报与相关内容"
+
+# ---------- 风格来源（v1.6：先按五大类，15 类暂不细分）----------
+family: F4                    # 安全与秩序
+style_ref: references/05-style-spec.md#F4
+style_status: 待填（人类补全五大类风格要求表后自动生效；本类继承 F4，不单独改）
+
+# ---------- 五轴 ----------
+domain: D13
+function: S1
+audience: [A01]
+audience_status: "AI 按主题拟定，待用户确认"   # 用户给出受众时以用户为准
+timeliness: T3
+authority: L4
+skeleton: S1
+
+# ---------- 画布：默认固定 A3（用户指定尺寸时才改，见 04_SKILL.md 尺寸决策规则）----------
+canvas:
+  size_mm: [297, 420]            # 默认 A3 竖版（裁切线内）；用户指定其他尺寸时以其为准
+  ratio: "1:1.414"
+  bleed_mm: 3
+  total_mm: [303, 426]
+  px_300dpi: [3508, 4961]        # 成品
+  px_300dpi_bleed: [3579, 5032]  # 含出血
+  format: [PNG, PDF]             # PNG 供屏幕/微信，PDF 供打印店
+  color: sRGB
+  transparent: false
+  safe_margin_mm: 18
+  body_font_min_pt: 26           # 含老年人/残障受众 → 31
+  crop_marks: true
+  design_units: [1080, 1527]     # 等比基准；每行容量 中文 25 字 / 英文 49 字符
+
+# ---------- 母本 ----------
+items: 10
+org: {zh: "社区居民委员会", en: "Residents' Committee"}
+placeholders:                    # 全部为示例值，发布前必须替换
+  ORG_ZH: "社区居民委员会"
+  ORG_EN: "Residents' Committee"
+  TITLE_ZH: "业主议事会公告"
+  TITLE_EN: "Owners' Meeting Notice"
+  SITES_ZH: "社区服务中心多功能厅"
+  SITES_EN: "Multi-purpose Hall, Community Service Center"
+  HOURS_ZH: "本月 20 日 19:00"
+  HOURS_EN: "the 20th of this month, 19:00"
+  PHONE: "400-123-2036"
+
+# ---------- L2 通用常识的来源（Gate 2 逐条复核）----------
+sources:
+  - item: "业主共同决定事项与公示"
+    basis: "《民法典》业主共同决定与公示要求（具体程序以本小区议事规则为准）"
+    level: L2
+
+# ---------- 待人类确认（未填齐不得出图）----------
+needs_human:
+  - "会议日期与地点（本月 20 日是否准确）"
+  - "议题清单是否完整"
+  - "公示天数与异议受理方式"
+  - "是否需要业主身份核验方式说明"
+
+# ---------- 骨架与分类专属校验 ----------
+checks:
+  - "公示类必须留意见反馈渠道与截止日期（本条已含）"
+  - "L4 → 不得使用政府公告的公文口吻"
+  - "T3 一次性 → 必填具体日期时间"
+  - "行数对齐：英文行数 ≤ 中文行数 + 1 且 ≤ 3 行（references/03-line-parity.md）"
+  - "母本 10 项字符级 100% 命中；电话两版字符一致"

@@ -1,0 +1,76 @@
+# content/D11_culture/theme.yaml
+# D11 文化与体育 —— 图书室开放与本月活动
+# 五轴分类（见 taxonomy.yaml）+ 槽位 + L2 来源 + 待人类确认 + 骨架专属校验
+# 由 0_生成工具/生成内容包.py 生成，勿手改（改数据源后重跑）
+
+theme_id: D11_culture
+title_zh: "图书室开放与本月活动"
+title_en: "Library Hours and This Month's Events"
+
+# ---------- 语言版本（v1.4 规则）----------
+language: zh-only          # bilingual（受众含 A06 国际居民）| zh-only（仅中文）
+language_rule: "受众含 A06 → 出中英双语；否则只出中文海报与相关内容"
+
+# ---------- 风格来源（v1.6：先按五大类，15 类暂不细分）----------
+family: F5                    # 文化与参与
+style_ref: references/05-style-spec.md#F5
+style_status: 待填（人类补全五大类风格要求表后自动生效；本类继承 F5，不单独改）
+
+# ---------- 五轴 ----------
+domain: D11
+function: S1
+audience: [A01]
+audience_status: "AI 按主题拟定，待用户确认"   # 用户给出受众时以用户为准
+timeliness: T2
+authority: L3
+skeleton: S1
+
+# ---------- 画布：默认固定 A3（用户指定尺寸时才改，见 04_SKILL.md 尺寸决策规则）----------
+canvas:
+  size_mm: [297, 420]            # 默认 A3 竖版（裁切线内）；用户指定其他尺寸时以其为准
+  ratio: "1:1.414"
+  bleed_mm: 3
+  total_mm: [303, 426]
+  px_300dpi: [3508, 4961]        # 成品
+  px_300dpi_bleed: [3579, 5032]  # 含出血
+  format: [PNG, PDF]             # PNG 供屏幕/微信，PDF 供打印店
+  color: sRGB
+  transparent: false
+  safe_margin_mm: 18
+  body_font_min_pt: 26           # 含老年人/残障受众 → 31
+  crop_marks: true
+  design_units: [1080, 1527]     # 等比基准；每行容量 中文 25 字 / 英文 49 字符
+
+# ---------- 母本 ----------
+items: 9
+org: {zh: "社区文化活动中心", en: "Community Culture Center"}
+placeholders:                    # 全部为示例值，发布前必须替换
+  ORG_ZH: "社区文化活动中心"
+  ORG_EN: "Community Culture Center"
+  TITLE_ZH: "图书室开放与本月活动"
+  TITLE_EN: "Library Hours and This Month's Events"
+  SITES_ZH: "社区服务中心三层图书室"
+  SITES_EN: "Library, 3rd floor, Community Service Center"
+  HOURS_ZH: "周二至周日 9:00-20:00"
+  HOURS_EN: "Tue-Sun 9:00-20:00"
+  PHONE: "400-123-2034"
+
+# ---------- L2 通用常识的来源（Gate 2 逐条复核）----------
+sources:
+  - item: "免费开放与办证借阅"
+    basis: "公共图书馆免费开放通行做法（借阅规则以本馆实际为准）"
+    level: L2
+
+# ---------- 待人类确认（未填齐不得出图）----------
+needs_human:
+  - "藏书数量与是否含少儿绘本"
+  - "本月活动的正式名称与时间"
+  - "是否需押金或办证费用"
+  - "开放时间是否含节假日"
+
+# ---------- 骨架与分类专属校验 ----------
+checks:
+  - "S1：开放时间与地点为最高优先级"
+  - "活动名称不得虚构；无活动时删该条而不是编"
+  - "行数对齐：英文行数 ≤ 中文行数 + 1 且 ≤ 3 行（references/03-line-parity.md）"
+  - "母本 9 项字符级 100% 命中；电话两版字符一致"
